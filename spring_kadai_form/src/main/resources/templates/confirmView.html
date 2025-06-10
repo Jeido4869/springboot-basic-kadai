@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"> <!-- Thymeleafの名前空間を定義 -->
+<head>
+<meta charset="UTF-8"> <!-- 文字コードをUTF-8に指定 -->
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- レスポンシブ対応 -->
+<title>お問い合わせ確認</title> <!-- ページタイトル -->
+</head>
+<body>
+	<h1>入力内容をご確認ください。</h1> <!-- ページの見出し -->
+	
+	<!-- formタグ
+	     - th:action="@{/form}" ：フォーム送信先をThymeleaf式で指定（/form）
+	     - method="post"：HTTPのPOSTメソッドで送信
+	     - th:object="${contactForm}"：モデルのcontactFormオブジェクトをバインド -->
+	<form th:action="@{/form}" method="post" th:object="${contactForm}">
+	
+		<!-- 入力内容を表形式で表示 -->
+		<table border="1">
+			<tr>
+				<th style="font-weight: bold; text-align: center;">項目</th> <!-- 表の見出し：項目名 -->
+				<th style="font-weight: bold; text-align: center;">入力内容</th> <!-- 表の見出し：ユーザーが入力した内容 -->
+			</tr>
+			<tr>
+				<td>お名前</td> <!-- 「お名前」項目のラベル -->
+				<td th:text="*{name}"></td> <!-- contactFormオブジェクトのnameプロパティの値を表示 -->
+			</tr>
+			<tr>
+				<td>メールアドレス</td> <!-- 「メールアドレス」項目のラベル -->
+				<td th:text="*{email}"></td> <!-- contactFormオブジェクトのemailプロパティの値を表示 -->
+			</tr>
+			<tr>
+				<td>お問い合わせ内容</td> <!-- 「お問い合わせ内容」項目のラベル -->
+				<td th:text="*{message}"></td> <!-- contactFormオブジェクトのmessageプロパティの値を表示 -->
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

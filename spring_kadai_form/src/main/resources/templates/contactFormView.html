@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>お問い合わせ</title>
+</head>
+<body>
+    <h1>お問い合わせフォーム</h1>
+
+    <!-- フォーム送信先は /form、POSTメソッド、th:object で form バインド -->
+    <form th:action="@{/form}" method="post" th:object="${contactForm}">
+
+        <table>
+            <tr>
+                <td>
+                    <!-- お名前ラベル -->
+                    <label for="name">お名前</label>
+                </td>
+                <td>
+                    <!-- 入力フィールド: contactForm.name -->
+                    <input type="text" th:field="*{name}"><br>
+
+                    <!-- バリデーションエラー表示: name -->
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <!-- メールアドレスラベル -->
+                    <label for="email">メールアドレス</label>
+                </td>
+                <td>
+                    <!-- 入力フィールド: contactForm.email -->
+                    <input type="text" th:field="*{email}"><br>
+
+                    <!-- バリデーションエラー表示: email -->
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <!-- お問い合わせ内容ラベル -->
+                    <label for="message">お問い合わせ内容</label>
+                </td>
+                <td>
+                    <!-- テキストエリア: contactForm.message -->
+                    <textarea rows="10" cols="30" th:field="*{message}"></textarea>
+
+                    <!-- バリデーションエラー表示: message -->
+                    <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red;"></div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 送信ボタン -->
+        <div><button type="submit">送信</button></div>
+    </form>
+</body>
+</html>
